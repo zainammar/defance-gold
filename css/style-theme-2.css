@@ -36,7 +36,7 @@ body{
 
 }
 .bg-bulding-white{ 
-  background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjtHiMiRl52ZxvmSNedDSTAoDDXCHwN0BtnEu9rbqDwRIq4J9d9zwAj0pI5wdcBFCuCAGi56VUcud3P2yFnUjnsAMW-USYl0pqVGYCLVNk__uvrDgfT2SFImUIozdgcDb8gANzfdjbR6CFo8dO8KLRwFh03dRAGXmsLG3x1QQec6XBhOjWVhasz7NeR4inn/s2442/bulding-white2.png');
+  background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgCp9exfRx-lWZA20GRDVFCrYaK2jgi4g6c3wFJ1ltao5rXmWMgXlkl5qoGIk7OcseP4rih-W_cbaplvMu5srCJ5vvFsgFHb_2puOH9EA1EPd47IO76eSYDJkO7QNqbVvTCQ54uCz9s3a4BsezhwE5C7FSdEib6TbWd-BZop_G8P1RLV6wZ_aqFwH1lGi5b/s2442/bulding-white-3.png');
   background-color: #ffffff;
   background-size: cover;
   background-position: center center;
@@ -90,10 +90,8 @@ color:rgb(0, 0, 0);
   text-align: center;
   font-size: large;
   font-weight: 700;
-  padding: 10px;
-  margin-top: 30px;
+  margin-top: 10px;
   margin-bottom: 10px;
-  margin: 20px;
   letter-spacing: -0.02em; /* Nimbus is a bit tighter */
   color:rgb(0, 0, 0);
   
@@ -104,14 +102,24 @@ color:rgb(0, 0, 0);
   font-size: 15px;
   color:rgb(0, 0, 0);
   text-align: left;
-  padding: 10px;
-  margin: 20px;
+  padding: 0px;
+  margin: 0px;
   color:rgb(0, 0, 0)
 }
 
 hr.red {
   border-top: 3px solid red;
 }
+.pad-1 {
+  padding: 50px;
+  margin: 50px;
+}
+
+.pad-2 {
+  padding: 80px;
+  margin: 80px;
+}
+
 /* Grid Container */
 .container {
   display: grid;
@@ -126,7 +134,7 @@ hr.red {
 }
 .container1 {
   display: grid;
-  grid-template-columns: 40% 20% auto;
+  grid-template-columns:15% 25% 25% auto;
   padding: 10px;
 }
 .container1 div {
