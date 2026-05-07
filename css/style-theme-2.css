@@ -151,7 +151,26 @@ color:rgb(0, 0, 0);
   padding: 10px;
   margin: 10px;
 }
+.gold-text2 {
+  background: linear-gradient(
+    180deg,
+    #F9F295 0%,   /* Light highlight */
+    #E0AA3E 30%,  /* Bright gold */
+    #B88A44 60%,  /* Mid tone */
+    #8C6D2F 100%  /* Dark shadow */
+  );
 
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent; /* Fallback */
+  font-size:15px;
+  font-weight: 700;
+  padding-top: 400px;
+  padding-right: 100px;
+  margin-bottom: 0px;
+  text-align: right;
+}
 hr.red {
   border-top: 3px solid red;
 }
