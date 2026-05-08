@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coming Soon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  :root {
+    --bg-primary: #0a0a0f;
+    --bg-secondary: #0f0f1a;
+    --bg-card: #12121f;
+    --bg-card-hover: #16162a;
+    --accent-1: #c8ff00;
+    --accent-2: #7b5ea7;
+    --accent-3: #ff4d6d;
+    --text-primary: #f0eeff;
+    --text-muted: #6b6a80;
+    --text-dim: #3a394a;
+    --border: rgba(255,255,255,0.06);
+    --border-accent: rgba(200,255,0,0.25);
+  }
+
+  html, body {
+    height: 100%;
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Syne', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── GRID LAYOUT ── */
+  .page-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto 1fr auto auto;
+    grid-template-areas:
+      "header  header  header"
+      "hero    hero    side"
+      "counter counter side"
+      "footer  notify  notify";
+    min-height: 100vh;
+    gap: 1px;
+    background: var(--border);
+  }
+
+  /* ── HEADER ── */
+  .header {
+    grid-area: header;
+    background: var(--bg-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 2.5rem;
+  }
+
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.08em;
+    color: var(--accent-1);
+    text-decoration: none;
+  }
+
+  .logo span {
+    color: var(--text-muted);
+  }
+
+  .status-pill {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent-1);
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.75); }
+  }
+
+  /* ── HERO ── */
+  .hero {
+    grid-area: hero;
+    background: var(--bg-primary);
+    padding: 4rem 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px;
+    left: -80px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(123,94,167,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent-1);
+    margin-bottom: 1.25rem;
+    opacity: 0;
+    animation: fade-up 0.8s ease forwards 0.2s;
+  }
+
+  .headline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4.5rem, 8vw, 7.5rem);
+    line-height: 0.9;
+    letter-spacing: 0.02em;
+    color: var(--text-primary);
+    opacity: 0;
+    animation: fade-up 0.9s ease forwards 0.4s;
+  }
+
+  .headline em {
+    font-style: normal;
+    color: var(--accent-1);
+    -webkit-text-stroke: 0;
+  }
+
+  .headline .outline {
+    -webkit-text-stroke: 1px rgba(200,255,0,0.4);
+    color: transparent;
+  }
+
+  .sub {
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    color: var(--text-muted);
+    max-width: 36ch;
+    line-height: 1.65;
+    opacity: 0;
+    animation: fade-up 0.9s ease forwards 0.6s;
+  }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SIDE PANEL ── */
+  .side {
+    grid-area: side;
+    background: var(--bg-card);
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    overflow: hidden;
+  }
+
+  .side-block {
+    background: var(--bg-card);
+    padding: 2rem 1.75rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: background 0.2s;
+  }
+
+  .side-block:hover {
+    background: var(--bg-card-hover);
+  }
+
+  .side-block + .side-block {
+    border-top: 1px solid var(--border);
+  }
+
+  .side-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  .side-value {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .feature-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .feature-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-size: 0.88rem;
+    color: var(--text-muted);
+  }
+
+  .feature-list li::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent-1);
+    flex-shrink: 0;
+  }
+
+  .big-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.5rem;
+    color: var(--accent-1);
+    line-height: 1;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── COUNTDOWN ── */
+  .countdown {
+    grid-area: counter;
+    background: var(--bg-secondary);
+    padding: 2rem 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  .countdown-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-right: 3rem;
+    white-space: nowrap;
+  }
+
+  .time-units {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    flex: 1;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .time-unit {
+    background: var(--bg-card);
+    padding: 1.25rem 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    transition: background 0.2s;
+  }
+
+  .time-unit:hover {
+    background: var(--bg-card-hover);
+  }
+
+  .time-digit {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.8rem;
+    color: var(--text-primary);
+    line-height: 1;
+    letter-spacing: 0.06em;
+    transition: color 0.3s;
+  }
+
+  .time-digit.tick {
+    color: var(--accent-1);
+  }
+
+  .time-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    grid-area: footer;
+    background: var(--bg-secondary);
+    padding: 1.5rem 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .social-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .social-link:hover {
+    color: var(--accent-1);
+  }
+
+  .footer-sep {
+    color: var(--text-dim);
+    opacity: 0.3;
+  }
+
+  /* ── NOTIFY ── */
+  .notify {
+    grid-area: notify;
+    background: var(--bg-secondary);
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .notify-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    white-space: nowrap;
+  }
+
+  .notify-form {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex: 1;
+    border: 1px solid var(--border-accent);
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--bg-card);
+    transition: border-color 0.2s;
+  }
+
+  .notify-form:focus-within {
+    border-color: var(--accent-1);
+  }
+
+  .notify-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 0.65rem 1rem;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    caret-color: var(--accent-1);
+  }
+
+  .notify-input::placeholder {
+    color: var(--text-dim);
+  }
+
+  .notify-btn {
+    background: var(--accent-1);
+    color: #0a0a0f;
+    border: none;
+    padding: 0.65rem 1.25rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: 500;
+    transition: opacity 0.2s;
+  }
+
+  .notify-btn:hover {
+    opacity: 0.85;
+  }
+
+  .notify-btn.submitted {
+    background: var(--accent-2);
+    color: var(--text-primary);
+  }
+
+  /* ── DECORATIVE GRID LINES ── */
+  .hero-grid-overlay {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(200,255,0,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,255,0,0.025) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  /* ── PROGRESS BAR ── */
+  .progress-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .progress-bar-track {
+    height: 2px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--accent-1);
+    border-radius: 2px;
+    width: 38%;
+    animation: grow-bar 1.8s ease forwards 0.8s;
+    transform-origin: left;
+    transform: scaleX(0);
+  }
+
+  @keyframes grow-bar {
+    to { transform: scaleX(1); }
+  }
+
+  .progress-pct {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    color: var(--accent-1);
+    letter-spacing: 0.06em;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 860px) {
+    .page-grid {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto auto auto auto;
+      grid-template-areas:
+        "header"
+        "hero"
+        "counter"
+        "side"
+        "footer"
+        "notify";
+    }
+
+    .headline {
+      font-size: clamp(3.5rem, 12vw, 5rem);
+    }
+
+    .countdown {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .countdown-label {
+      margin-right: 0;
+    }
+
+    .time-units {
+      width: 100%;
+    }
+
+    .notify {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .notify-form {
+      width: 100%;
+    }
+
+    .img-4{
+      width: 100px;
+      height: auto;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-grid">
+
+  <!-- HEADER -->
+  <header class="header">
+    <a href="#" class="logo"> Defence <span>Gold Souk</span></a>
+    <div class="status-pill">
+      <div class="status-dot"></div>
+      info@defencegoldsouk.com
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-grid-overlay"></div>
+    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjSc3b22smOwzrp4CLg9-ZBGB_fgRxB-DuRLw4OJDA-K_I7Q20MKLp2is4FoE7VcZT1obReiA6f07w73tQc1U874MIASbynN8dU4sVymwQoLT8RMVH1iF38boLJmdSe_HkUgOM41wq45osOGHWrFGo5_BT0X4n9TECuVlTLjb0LSgD3boLdjvg-upF6yC5r/s572/logo-removebg-preview.png" style="width:400px; height: auto; margin-bottom: 2rem;">
+ 
+    <p class="eyebrow">// Defence Gold Souk is coming</p>
+    <h1 class="headline">
+      Almost<br>
+      <em>Here.</em><br>
+      <span class="outline">Ready.</span>
+    </h1>
+    <p class="sub">
+      <b>Building Height:</b><br>
+      6 Storeys (Ground + 5 Floors).<br>
+      <b></b>Total Capacity:</b>
+      Designed to house approximately<br>
+     <b> 60 premium shops. </b> 
+      Target Niche:Gold, Silver, Diamonds,
+      Bullion, and Luxury Watches.
+  </p>
+    </p>
+  </section>
+
+  <!-- SIDE PANEL -->
+  <aside class="side">
+    <img  class="img-5" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgjWbblU6ldUhn4svgR34LJ8vHC4YzbSCAKApxD59E88FJ7OPKpkG3DO-eMpKmIAbKQdNBBdlIBZPbZd1MdfqDt-Hgjrof0_Dy-aN7prdoxd5YBfzH53J711DfUZpYQ2TE6R2BchE0wrBE040Pou1EZ3aLxempks0V1YkItAnDdinNB2zSTbtoIfzQqF2kc/s1200/frontentrence.png">
+    <div class="side-block">
+      <p class="side-label">Build progress</p>
+      <div class="progress-wrap">
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill"></div>
+        </div>
+      
+      </div>
+
+    </div>
+
+    <div class="side-block">
+     <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj_iuLEn_bcLYZkahNK1RFhuHAsJJCrUBJpqd4oRuSi5_zphyphenhyphenBcsXaIKURElGoE7LWzMfW9lIAHFfGoQOVW_rZjUDAbjMfOuF6698N2RJR6KWa8_sbRQC8a7EYpXe43JTNV0s9z0TdbbSL6V4su4ifETghxe0MgenU-vaNH9cQgCXH1ru9hcfRRr4emnJsI/s2560/bulding.jpg">
+    </div>
+
+    <div class="side-block">
+
+    </div>
+
+  </aside>
+
+
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <a href="#" class="social-link">Twitter</a>
+    <span class="footer-sep">/</span>
+    <a href="#" class="social-link">Instagram</a>
+    <span class="footer-sep">/</span>
+    <a href="#" class="social-link">LinkedIn</a>
+    <span class="footer-sep">/</span>
+    <a href="mailto:info@defencegoldsouk.com" class="social-link">info@defencegoldsouk.com</a>
+  </footer>
+
+<script>
+  // Countdown — target date 90 days from now
+  const target = new Date();
+  target.setDate(target.getDate() + 90);
+  target.setHours(0, 0, 0, 0);
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function tick() {
+    const now = new Date();
+    const diff = target - now;
+    if (diff <= 0) return;
+
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+
+    const sEl = document.getElementById('secs');
+    sEl.textContent = pad(s);
+    sEl.classList.add('tick');
+    setTimeout(() => sEl.classList.remove('tick'), 300);
+
+    document.getElementById('days').textContent = pad(d);
+    document.getElementById('hours').textContent = pad(h);
+    document.getElementById('mins').textContent = pad(m);
+  }
+
+  tick();
+  setInterval(tick, 1000);
+
+  // Notify button
+  function handleNotify() {
+    const input = document.getElementById('email-input');
+    const btn = document.getElementById('notify-btn');
+    const val = input.value.trim();
+    if (!val || !val.includes('@')) {
+      input.style.borderLeft = '2px solid #ff4d6d';
+      setTimeout(() => input.style.borderLeft = '', 1000);
+      return;
+    }
+    btn.textContent = '✓ You\'re in';
+    btn.classList.add('submitted');
+    btn.disabled = true;
+    input.disabled = true;
+    input.value = '';
+    input.placeholder = 'See you on the other side.';
+  }
+
+  // Animated spot counter
+  let count = 2847;
+  setInterval(() => {
+    count += Math.floor(Math.random() * 3);
+    document.getElementById('spots').textContent = count.toLocaleString();
+  }, 4000);
+</script>
+
+</body>
+</html>
